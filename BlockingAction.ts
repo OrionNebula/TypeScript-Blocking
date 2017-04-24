@@ -1,5 +1,5 @@
 import ByReference from './ByReference';
-import { ReadLine, createInterface } from 'readline';
+import * as readline from 'readline';
 
 /** Base class for all blocking methods. */
 export abstract class BlockingAction {
@@ -80,17 +80,17 @@ export class ConsoleInput extends BlockingAction {
 
   setup(iter: IterableIterator<BlockingAction>) {
     let t = this;
-    const readLine = createInterface({
+    const rl = readline.createInterface({
       input: process.stdin
     });
 
     let handler = line => {
       t.out.value = line;
-      readLine.removeListener('line', handler);
-      readLine.close();
+      rl.removeListener('line', handler);
+      rl.close();
       t.handleNext(iter);
     };
 
-    readLine.on('line', handler);
+    rl.on('line', handler);
   }
 }

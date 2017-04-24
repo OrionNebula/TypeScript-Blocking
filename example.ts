@@ -1,6 +1,6 @@
 import { BlockingAction, Wait, StreamRead, ConsoleInput } from './BlockingAction';
 import ByReference from './ByReference';
-import { createReadStream } from 'fs';
+import * as fs from 'fs';
 
 function* exampleProc() : IterableIterator<BlockingAction> {
   let line = new ByReference<string>();
@@ -18,7 +18,7 @@ function* exampleProc() : IterableIterator<BlockingAction> {
   console.log("Ok, now for something neat. Tell me a filename, and I'll give you the first 100 bytes!");
   yield new ConsoleInput(line); //Same thing here.
 
-  let str = createReadStream(line.value);
+  let str = fs.createReadStream(line.value);
   yield new StreamRead(str, 100, buf); //Open a stream and yield until 100 bytes are read or the stream closes.
   console.log(buf.value.toString());
   str.close();
