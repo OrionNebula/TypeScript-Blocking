@@ -1,0 +1,21 @@
+{
+  "name": "TypeScript-Blocking",
+  "version": "0.0.0",
+  "description": "Adds emulation of blocking calls to TypeScript through the use of generators.",
+  "license": "MIT",
+  "repository": "https://github.com/OrionNebula/TypeScript-Blocking",
+  "devDependencies": {
+    "@types/node": "^7.0.13",
+    "nodemon": "^1.11.0",
+    "ts-node": "^3.0.2",
+    "typescript": "^2.2.2"
+  },
+  "dependencies": {
+    "@types/node": "^7.0.13",
+    "typescript": "^2.2.2"
+  },
+  "scripts": {
+    "start": "npm run build:live",
+    "build:live": "nodemon --exec .\\node_modules\\.bin\\ts-node -- .\\example.ts"
+  }
+}
