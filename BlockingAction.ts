@@ -86,11 +86,10 @@ export class ConsoleInput extends BlockingAction {
 
     let handler = line => {
       t.out.value = line;
-      rl.removeListener('line', handler);
       rl.close();
       t.handleNext(iter);
     };
 
-    rl.on('line', handler);
+    rl.once('line', handler);
   }
 }
